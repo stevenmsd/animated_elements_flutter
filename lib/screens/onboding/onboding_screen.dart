@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
@@ -11,6 +12,13 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  late RiveAnimationController _btnAnimationController;
+  @override
+  void initState() {
+    _btnAnimationController = OneShotAnimation("active", autoplay: false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -54,10 +62,56 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ],
                 ),
               ),
+              AnimatedBtn(
+                btnAnimationController: _btnAnimationController,
+                press: () {
+                  _btnAnimationController.isActive = true;
+                },
+              )
             ],
           ),
         ))
       ]),
+    );
+  }
+}
+
+class AnimatedBtn extends StatelessWidget {
+  const AnimatedBtn({
+    super.key,
+    required RiveAnimationController btnAnimationController,
+    required this.press,
+  }) : _btnAnimationController = btnAnimationController;
+
+  final RiveAnimationController _btnAnimationController;
+  final VoidCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: press,
+      child: SizedBox(
+          height: 64,
+          width: 260,
+          child: Stack(children: [
+            RiveAnimation.asset(
+              "assets/RiveAssets/button.riv",
+              controllers: [_btnAnimationController],
+            ),
+            Positioned.fill(
+              top: 8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(CupertinoIcons.arrow_right),
+                  Text(
+                    "Start the course",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            )
+          ])),
     );
   }
 }
