@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
+
+import '../components/animated_btn.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -47,7 +50,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Spacer(),
               SizedBox(
                 width: 260,
                 child: Column(
@@ -62,12 +67,59 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ],
                 ),
               ),
+              const Spacer(
+                flex: 2,
+              ),
               AnimatedBtn(
                 btnAnimationController: _btnAnimationController,
                 press: () {
                   _btnAnimationController.isActive = true;
+                  showGeneralDialog(
+                      barrierDismissible: true,
+                      barrierLabel: "Sign In",
+                      context: context,
+                      pageBuilder: (context, _, __) => Center(
+                            child: Container(
+                              height: 620,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 32, horizontal: 24),
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40)),
+                              ),
+                              child: Scaffold(
+                                backgroundColor: Colors.transparent,
+                                body: Column(
+                                  children: [
+                                    const Text(
+                                      "Sign In",
+                                      style: TextStyle(
+                                          fontSize: 34, fontFamily: "Poppins"),
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 16),
+                                      child: Text(
+                                        "Access to 240+ hours pf content. Learn design and code, by building real apps with Flutter and Swift",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    SignInForm()
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ));
                 },
-              )
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 24),
+                child: Text(
+                    "Purcahse includes access to 30+ courses,240+ premium tutorials, 120+hours of videso, source files and certificates"),
+              ),
             ],
           ),
         ))
@@ -76,42 +128,47 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
-class AnimatedBtn extends StatelessWidget {
-  const AnimatedBtn({
+class SignInForm extends StatelessWidget {
+  const SignInForm({
     super.key,
-    required RiveAnimationController btnAnimationController,
-    required this.press,
-  }) : _btnAnimationController = btnAnimationController;
-
-  final RiveAnimationController _btnAnimationController;
-  final VoidCallback press;
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: SizedBox(
-          height: 64,
-          width: 260,
-          child: Stack(children: [
-            RiveAnimation.asset(
-              "assets/RiveAssets/button.riv",
-              controllers: [_btnAnimationController],
-            ),
-            Positioned.fill(
-              top: 8,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(CupertinoIcons.arrow_right),
-                  Text(
-                    "Start the course",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-            )
-          ])),
-    );
+    return Form(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Email",
+          style: TextStyle(color: Colors.black54),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 16),
+          child: TextFormField(
+            decoration: InputDecoration(
+                prefixIcon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SvgPicture.asset("assets/icons/email.svg"),
+            )),
+          ),
+        ),
+        const Text(
+          "Password",
+          style: TextStyle(color: Colors.black54),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 16),
+          child: TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+                prefixIcon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SvgPicture.asset("assets/icons/password.svg"),
+            )),
+          ),
+        ),
+      ],
+    ));
   }
 }
