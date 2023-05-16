@@ -30,7 +30,7 @@ class AnimatedBtn extends StatelessWidget {
                 children: const [
                   Icon(CupertinoIcons.arrow_right),
                   Text(
-                    "Start the course",
+                    "Inicia Ahora",
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ],

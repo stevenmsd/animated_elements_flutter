@@ -37,13 +37,13 @@ Future<Object?> customSignInDialog(BuildContext context,
                     Column(
                       children: [
                         const Text(
-                          "Sign In",
+                          "Inciar Sesión",
                           style: TextStyle(fontSize: 34, fontFamily: "Poppins"),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 16),
                           child: Text(
-                            "Access to 240+ hours pf content. Learn design and code, by building real apps with Flutter and Swift",
+                            "Acceso las 24, una herramienta muy útil para tu dia a dia",
                             textAlign: TextAlign.center,
                           ),
                         ),

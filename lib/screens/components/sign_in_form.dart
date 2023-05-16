@@ -60,7 +60,7 @@ class SignInForm extends StatelessWidget {
                 CupertinoIcons.arrow_right,
                 color: Color(0xFFFE0037),
               ),
-              label: const Text("Sign In")),
+              label: const Text("Inciar Sesión")),
         )
       ],
     ));

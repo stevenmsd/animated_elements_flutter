@@ -1,12 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
 
 import '../components/animated_btn.dart';
 import '../components/custom_sign_in_dialog.dart';
-import '../components/sign_in_form.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -49,7 +47,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: const SizedBox(),
         )),
         AnimatedPositioned(
-          top: isSignInDialogShown ? -50 : 0,
+          top: isSignInDialogShown ? -50 : -50,
           duration: const Duration(milliseconds: 240),
           height: size.height,
           width: size.width,
@@ -65,12 +63,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Column(
                     children: const [
                       Text(
-                        "Learn desing & code",
+                        "Nuevo chat",
                         style: TextStyle(
                             fontSize: 60, fontFamily: "Poppins", height: 1.2),
                       ),
-                      Text(
-                          "Don't skip desing. Learn design and conde, by Steeven real apps with Flutter and Switf. Complete courses about the best tools")
+                      Text("Accede a la mejor tecnología")
                     ],
                   ),
                 ),
@@ -81,6 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   btnAnimationController: _btnAnimationController,
                   press: () {
                     _btnAnimationController.isActive = true;
+
                     Future.delayed(
                       const Duration(milliseconds: 800),
                       () {
@@ -99,8 +97,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 24),
-                  child: Text(
-                      "Purcahse includes access to 30+ courses,240+ premium tutorials, 120+hours of videso, source files and certificates"),
+                  child: Text("Aprovechale ahora"),
                 ),
               ],
             ),
