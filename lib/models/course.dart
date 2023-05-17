@@ -7,7 +7,7 @@ class Course {
   Course(
       {required this.title,
       this.description = "Build and animate an iOS app from scratch",
-      this.iconSrc = "assets/icons/ios.svg",
+      this.iconSrc = "assets/icons/code.svg",
       this.bgColor = const Color(0xFF7553f6)});
 }
 
