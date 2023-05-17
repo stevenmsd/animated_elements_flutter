@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../models/course.dart';
+import 'components/course_card.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -8,116 +11,94 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Text("Courses",
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.w600)),
-          ),
-          Row(
-            children: [
-              ...courses.map((course) => CourseCard(course: course)).toList(),
-            ],
-          )
-        ]),
+        bottom: false,
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text("Courses",
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.w600)),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...courses
+                      .map((course) => Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: CourseCard(course: course),
+                          ))
+                      .toList(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                "Recent",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
+            ...resentCourses.map((course) => Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  child: SecondaryCourseCard(course: course),
+                ))
+          ]),
+        ),
       ),
     );
   }
 }
 
-class CourseCard extends StatelessWidget {
-  const CourseCard({
+class SecondaryCourseCard extends StatelessWidget {
+  const SecondaryCourseCard({
     super.key,
     required this.course,
   });
-
   final Course course;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      height: 280,
-      width: 260,
-      decoration: const BoxDecoration(
-          color: Color(0xFF7553F6),
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                course.title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12, bottom: 8),
-                child: Text(
-                  course.description,
-                  style: const TextStyle(color: Colors.white70),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      decoration: BoxDecoration(
+          color: course.bgColor,
+          borderRadius: const BorderRadius.all(Radius.circular(20))),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  course.title,
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.w600),
                 ),
-              ),
-              const Text(
-                "61 SECTIONS - 11 HOURS",
-                style: TextStyle(color: Colors.white54),
-              ),
-              const Spacer(),
-              Row(
-                children: List.generate(
-                    3,
-                    (index) => Transform.translate(
-                          offset: Offset((-10 * index).toDouble(), 0),
-                          child: CircleAvatar(
-                            radius: 20,
-                            backgroundImage: AssetImage(
-                                "assets/avaters/Avatar ${index + 1}.jpg"),
-                          ),
-                        )),
-              )
-            ],
+                const Text(
+                  "Watch video -15 mins",
+                  style: TextStyle(color: Colors.white60, fontSize: 16),
+                )
+              ],
+            ),
           ),
-        ),
-        SvgPicture.asset(course.iconSrc),
-      ]),
+          const SizedBox(
+            height: 40,
+            child: VerticalDivider(
+              color: Colors.white70,
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          SvgPicture.asset(course.iconSrc)
+        ],
+      ),
     );
   }
 }
-
-class Course {
-  final String title, description, iconSrc;
-  final Color bgColor;
-
-  Course(
-      {required this.title,
-      this.description = "Build and animate an iOS app from scratch",
-      this.iconSrc = "assets/icons/iso.svg",
-      this.bgColor = const Color(0xFF7553f6)});
-}
-
-List<Course> courses = [
-  Course(title: "Animations in SwiftUI"),
-  Course(
-    title: "Animations in Flutter",
-    iconSrc: "assets/icons/code.svg",
-    bgColor: const Color(0xFF80A4FF),
-  ),
-];
-
-List<Course> resentCourses = [
-  Course(title: "State Machine"),
-  Course(
-    title: "Animated Menu",
-    bgColor: const Color(0xFF9CC5FF),
-    iconSrc: "assets/icons/code.svg",
-  ),
-  Course(
-    title: "Animated Menu",
-    bgColor: const Color(0xFF9CC5FF),
-    iconSrc: "assets/icons/code.svg",
-  ),
-];
