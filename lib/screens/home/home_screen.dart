@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Text("Courses",
+              child: Text("Mi historial",
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       color: Colors.black, fontWeight: FontWeight.w600)),
             ),
@@ -37,18 +37,22 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                "Recent",
+                "Sugerencias",
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall!
                     .copyWith(fontWeight: FontWeight.w600),
               ),
             ),
-            ...resentCourses.map((course) => Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                  child: SecondaryCourseCard(course: course),
-                ))
+            ...resentCourses.map(
+              (course) => Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: SecondaryCourseCard(course: course),
+              ),
+            ),
+            const SizedBox(
+              height: 80,
+            )
           ]),
         ),
       ),
@@ -78,11 +82,16 @@ class SecondaryCourseCard extends StatelessWidget {
                 Text(
                   course.title,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.w600),
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
                 ),
                 const Text(
-                  "Watch video -15 mins",
-                  style: TextStyle(color: Colors.white60, fontSize: 16),
+                  "Inciar",
+                  style: TextStyle(
+                    color: Colors.white60,
+                    fontSize: 16,
+                  ),
                 )
               ],
             ),

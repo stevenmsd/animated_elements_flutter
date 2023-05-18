@@ -15,7 +15,7 @@ class CourseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      height: 280,
+      height: 220,
       width: 260,
       decoration: BoxDecoration(
           color: course.bgColor,
@@ -40,10 +40,12 @@ class CourseCard extends StatelessWidget {
                 ),
               ),
               const Text(
-                "61 SECTIONS - 11 HOURS",
+                "20:40 16/05/2023",
                 style: TextStyle(color: Colors.white54),
               ),
-              const Spacer(),
+
+              /* 
+               const Spacer(),
               Row(
                 children: List.generate(
                     3,
@@ -55,7 +57,7 @@ class CourseCard extends StatelessWidget {
                                 "assets/avaters/Avatar ${index + 1}.jpg"),
                           ),
                         )),
-              )
+              ) */
             ],
           ),
         ),

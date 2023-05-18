@@ -22,16 +22,18 @@ Future<Object?> customSignInDialog(BuildContext context,
       },
       pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 620,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+              height: 550,
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+              padding: const EdgeInsets.only(
+                  top: 32, left: 24, right: 24, bottom: 10),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.94),
                 borderRadius: const BorderRadius.all(Radius.circular(40)),
               ),
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Stack(
+              child: Card(
+                shadowColor: Colors.transparent,
+                color: Colors.transparent,
+                child: Stack(
                   clipBehavior: Clip.none,
                   children: [
                     Column(
@@ -40,33 +42,20 @@ Future<Object?> customSignInDialog(BuildContext context,
                           "Inciar Sesión",
                           style: TextStyle(fontSize: 34, fontFamily: "Poppins"),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
-                            "Acceso las 24, una herramienta muy útil para tu dia a dia",
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
                         const SignInForm(),
                         Row(
                           children: const [
                             Expanded(child: Divider()),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
                               child: Text(
-                                "OR",
+                                "O",
                                 style: TextStyle(color: Colors.black26),
                               ),
                             ),
                             Expanded(child: Divider())
                           ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Text(
-                            "Sign up with Email, Apple or Google",
-                            style: TextStyle(color: Colors.black54),
-                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,21 +77,39 @@ Future<Object?> customSignInDialog(BuildContext context,
                                   width: 64,
                                 )),
                             IconButton(
-                                padding: EdgeInsets.zero,
-                                onPressed: () {},
-                                icon: SvgPicture.asset(
-                                  "assets/icons/google_box.svg",
-                                  height: 64,
-                                  width: 64,
-                                )),
+                              padding: EdgeInsets.zero,
+                              onPressed: () {},
+                              icon: const Image(
+                                image:
+                                    AssetImage("assets/icons/google_box.png"),
+                              ),
+                            ),
                           ],
-                        )
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text("No tiene una cuenta."),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xFF01D6EB),
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: const Text('Registrese.'),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     const Positioned(
                       left: 0,
                       right: 0,
-                      bottom: -48,
+                      bottom: -60,
                       child: CircleAvatar(
                         radius: 16,
                         backgroundColor: Colors.white,

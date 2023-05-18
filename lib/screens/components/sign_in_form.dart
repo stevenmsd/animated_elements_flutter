@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
+import 'package:flutter/src/painting/gradient.dart' as gradiente;
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
@@ -81,10 +82,12 @@ class _SignInFormState extends State<SignInForm> {
                       return null;
                     },
                     onSaved: (email) {},
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset("assets/icons/email.svg"),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Image(
+                        image: AssetImage("assets/icons/email.png"),
+                      ),
                     )),
                   ),
                 ),
@@ -103,14 +106,56 @@ class _SignInFormState extends State<SignInForm> {
                     },
                     onSaved: (password) {},
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset("assets/icons/password.svg"),
-                    )),
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            child: Image(
+                              image: AssetImage("assets/icons/password.png"),
+                            ))),
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 24),
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(
+                        gradient: gradiente.LinearGradient(colors: [
+                          Color(0xFF7266DD),
+                          /* Color(0xFF134AD1), */
+                          Color(0xFF01D6EB),
+                          /* Color(0xFF1CBAE7), */
+                          //add more colors
+                        ]),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                          bottomRight: Radius.circular(25),
+                          bottomLeft: Radius.circular(25),
+                        ),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                              color: Color.fromRGBO(
+                                  0, 0, 0, 0.25), //shadow for button
+                              blurRadius: 6,
+                              offset: Offset(2, 3)) //blur radius of shadow
+                        ]),
+                    child: ElevatedButton.icon(
+                        onPressed: () {
+                          signIn(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          shadowColor: Colors.transparent,
+                          backgroundColor: Colors.transparent,
+                          minimumSize: const Size(double.infinity, 56),
+                        ),
+                        icon: const Icon(
+                          CupertinoIcons.arrow_right,
+                          /* color: Color(0xFFFE0037), */
+                        ),
+                        label: const Text("Inciar Sesión")),
+                  ),
+                )
+                /*  Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 24),
                   child: ElevatedButton.icon(
                       onPressed: () {
@@ -131,7 +176,7 @@ class _SignInFormState extends State<SignInForm> {
                         color: Color(0xFFFE0037),
                       ),
                       label: const Text("Inciar Sesión")),
-                )
+                ) */
               ],
             )),
         isShowLoading

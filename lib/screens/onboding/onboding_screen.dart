@@ -63,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Column(
                     children: const [
                       Text(
-                        "Nuevo chat",
+                        "Smart Talk",
                         style: TextStyle(
                             fontSize: 60, fontFamily: "Poppins", height: 1.2),
                       ),
